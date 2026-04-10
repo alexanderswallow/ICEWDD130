@@ -1,0 +1,67 @@
+/* Add your CSS here to style your valentines day page */
+body, h1, h2, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #fff0f6; 
+    color: #333;
+}
+
+#wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px 0;
+    background-color: #ffb3c6;
+}
+
+nav li {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+main {
+    text-align: center;
+    padding: 20px 0;
+}
+
+main img {
+    width: 300px;
+    display: block;
+    margin: 20px auto;
+}
+
+section {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #ffe0eb;
+    border-radius: 10px;
+}
+
+section h2 {
+    color: #d6336c;
+    margin-bottom: 10px;
+}
+
+
+footer {
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px;
+    background-color: #ffb3c6;
+    font-weight: bold;
+}
