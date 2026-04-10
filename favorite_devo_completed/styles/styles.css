@@ -1,0 +1,160 @@
+
+body {
+  margin: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #d3d3d3, #001f3f);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.container {
+  text-align: center;
+}
+
+
+.header {
+  padding: 20px 0;
+}
+
+.header-image {
+  background-image: url('../images/icenter.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+.header-image h1 {
+  margin: 0;
+  line-height: 0.9;
+  font-size: 3.5em;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  background: #00000055;
+}
+
+
+.content-box {
+  background-color: white;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 900px;
+  padding: 40px;
+  box-shadow: 5px 5px 0px black;
+  min-height: 400px;
+  text-align: left;
+}
+
+
+.section-title {
+  font-size: 1.4em;
+  color: #001f3f;
+  border-bottom: 3px solid #001f3f;
+  padding-bottom: 6px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+
+.devo-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+  font-size: 0.95em;
+}
+
+.devo-table thead {
+  background-color: #001f3f;
+  color: white;
+}
+
+.devo-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+}
+
+.devo-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid #dde3ea;
+  color: #222;
+}
+
+.devo-table tbody tr:nth-child(even) {
+  background-color: #f0f4f8;
+}
+
+.devo-table tbody tr:hover {
+  background-color: #dce8f5;
+}
+
+
+.devo-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: bold;
+  font-size: 0.9em;
+  color: #001f3f;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.form-group input {
+  padding: 10px 12px;
+  border: 2px solid #b0bec5;
+  border-radius: 4px;
+  font-size: 0.95em;
+  color: #222;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #001f3f;
+}
+
+.form-group input::placeholder {
+  color: #aaa;
+}
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-submit {
+  background-color: #001f3f;
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-submit:hover {
+  background-color: #003366;
+}
+
+.btn-submit:active {
+  transform: translateY(1px);
+}

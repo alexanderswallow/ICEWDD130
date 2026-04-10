@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Favorite Devotionals</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-image">
+        <h1>My Favorite<br>Devotionals</h1>
+      </div>
+    </header>
+    <main>
+      <div class="content-box">
+
+        <h2 class="section-title">Favorite Devotionals</h2>
+
+        <table class="devo-table">
+          <thead>
+            <tr>
+              <th>Speaker</th>
+              <th>Title</th>
+              <th>Location</th>
+              <th>Year</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Elder David A. Bednar</td>
+              <td>Seek Learning by Faith</td>
+              <td>BYU–Idaho, Rexburg, ID</td>
+              <td>2006</td>
+            </tr>
+            <tr>
+              <td>President Henry B. Eyring</td>
+              <td>Help Them Aim High</td>
+              <td>BYU–Idaho, Rexburg, ID</td>
+              <td>2012</td>
+            </tr>
+            <tr>
+              <td>Elder Dieter F. Uchtdorf</td>
+              <td>Two Principles for Any Economy</td>
+              <td>BYU–Idaho, Rexburg, ID</td>
+              <td>2009</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-title">Add a Devotional</h2>
+
+        <form class="devo-form">
+          <div class="form-group">
+            <label for="speaker">Speaker</label>
+            <input type="text" id="speaker" name="speaker" placeholder="e.g. Elder David A. Bednar" />
+          </div>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" placeholder="e.g. Seek Learning by Faith" />
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="e.g. BYU–Idaho, Rexburg, ID" />
+          </div>
+          <div class="form-group">
+            <label for="year">Year</label>
+            <input type="number" id="year" name="year" placeholder="e.g. 2024" min="1900" max="2099" />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-submit">Add Devotional</button>
+          </div>
+        </form>
+
+      </div>
+    </main>
+  </div>
+</body>
+</html>
