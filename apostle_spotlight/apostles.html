@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostles Spotlight</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E8ECED;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px 50px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .page-header h1 {
+            font-family: Arial, sans-serif;
+            font-size: 1.9rem;
+            color: #1e2a3a;
+            margin-bottom: 6px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: #4a5568;
+        }
+
+        .spotlight-panel {
+            position: relative;
+            width: 100%;
+            max-width: 860px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+        }
+
+        .panel-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('images/christus.webp');
+            background-size: cover;
+            background-position: center top;
+            filter: brightness(0.72) saturate(1.2);
+            z-index: 0;
+        }
+
+        .panel-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                120deg,
+                rgba(0,0,0,0.32) 0%,
+                rgba(10,20,60,0.15) 50%,
+                rgba(5,15,50,0.36) 100%
+            );
+        }
+
+        .panel-content {
+            position: relative;
+            z-index: 1;
+            padding: 40px 40px 48px;
+        }
+
+      
+        .section-title {
+            font-family: Arial, sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+            margin-bottom: 28px;
+            letter-spacing: 0.02em;
+        }
+
+       
+        .first-presidency-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 44px;
+            flex-wrap: wrap;
+        }
+
+        .twelve-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px 20px;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+     
+        .apostle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .portrait-wrap {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            overflow: hidden;
+            background: #c8d0d8;
+            flex-shrink: 0;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.35);
+            transition:
+                border-color 0.28s ease,
+                box-shadow 0.28s ease,
+                transform 0.22s ease;
+        }
+
+        
+        .apostle:hover .portrait-wrap {
+            border-color: #f0c040;
+            box-shadow: 0 0 0 4px rgba(240,192,64,0.4), 0 6px 24px rgba(0,0,0,0.45);
+            transform: scale(1.08);
+        }
+
+        .portrait-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+
+        .apostle-name {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.75);
+            line-height: 1.3;
+            max-width: 112px;
+        }
+
+        
+        .twelve-grid .portrait-wrap {
+            width: 100px;
+            height: 100px;
+        }
+
+        .twelve-grid .apostle-name {
+            font-size: 11px;
+            max-width: 92px;
+        }
+
+        
+        .tooltip {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(8, 15, 40, 0.94);
+            color: #efefef;
+            font-size: 12px;
+            line-height: 1.55;
+            padding: 10px 14px;
+            border-radius: 9px;
+            width: 210px;
+            pointer-events: none;
+            z-index: 30;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.55);
+            border: 1px solid rgba(240,192,64,0.4);
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 7px solid transparent;
+            border-top-color: rgba(8,15,40,0.94);
+        }
+
+        .tooltip strong {
+            display: block;
+            color: #f0c040;
+            margin-bottom: 5px;
+            font-size: 12.5px;
+        }
+
+        .apostle:hover .tooltip {
+            display: block;
+            animation: fadeUp 0.18s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(6px); }
+            to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        
+        @media (max-width: 640px) {
+            .twelve-grid { grid-template-columns: repeat(3, 1fr); }
+            .portrait-wrap { width: 90px; height: 90px; }
+            .twelve-grid .portrait-wrap { width: 78px; height: 78px; }
+            .panel-content { padding: 28px 18px 36px; }
+            .first-presidency-row { gap: 24px; }
+            .section-title { font-size: 1.25rem; }
+        }
+
+        @media (max-width: 420px) {
+            .twelve-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-header">
+        <h1>Apostles Spotlight</h1>
+        <p>Hover over any portrait to learn more</p>
+    </div>
+
+    <div class="spotlight-panel">
+        <div class="panel-bg"></div>
+        <div class="panel-content">
+
+            
+            <h2 class="section-title">First Presidency</h2>
+            <div class="first-presidency-row">
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/eyring.webp" alt="Henry B. Eyring">
+                    </div>
+                    <span class="apostle-name">Henry B. Eyring</span>
+                    <div class="tooltip">
+                        <strong>Henry B. Eyring</strong>
+                        2nd Counselor, First Presidency<br>
+                        Ordained Apostle: 1995<br>
+                        Former Commissioner of Church Education
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/oaks.webp" alt="Dallin H. Oaks">
+                    </div>
+                    <span class="apostle-name">Dallin H. Oaks</span>
+                    <div class="tooltip">
+                        <strong>Dallin H. Oaks</strong>
+                        1st Counselor, First Presidency<br>
+                        Ordained Apostle: 1984<br>
+                        Former Utah Supreme Court Justice
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/holland.webp" alt="Jeffrey R. Holland">
+                    </div>
+                    <span class="apostle-name">Jeffrey R. Holland</span>
+                    <div class="tooltip">
+                        <strong>Jeffrey R. Holland</strong>
+                        Quorum of the Twelve<br>
+                        Ordained Apostle: 1994<br>
+                        Former President of BYU
+                    </div>
+                </div>
+
+            </div>
+            <h2 class="section-title">Quorum of the Twelve Apostles</h2>
+            <div class="twelve-grid">
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/uchtdorf.webp" alt="Dieter F. Uchtdorf">
+                    </div>
+                    <span class="apostle-name">Dieter F. Uchtdorf</span>
+                    <div class="tooltip">
+                        <strong>Dieter F. Uchtdorf</strong>
+                        Ordained: Oct 2, 2004<br>
+                        Former international airline captain &amp; Lufthansa chief pilot
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/bednar.webp" alt="David A. Bednar">
+                    </div>
+                    <span class="apostle-name">David A. Bednar</span>
+                    <div class="tooltip">
+                        <strong>David A. Bednar</strong>
+                        Ordained: Oct 7, 2004<br>
+                        Former President of Ricks College (now BYU-Idaho)
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/cook.webp" alt="Quentin L. Cook">
+                    </div>
+                    <span class="apostle-name">Quentin L. Cook</span>
+                    <div class="tooltip">
+                        <strong>Quentin L. Cook</strong>
+                        Ordained: Oct 6, 2007<br>
+                        Former health care executive and attorney
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/christofferson.webp" alt="D. Todd Christofferson">
+                    </div>
+                    <span class="apostle-name">D. Todd Christofferson</span>
+                    <div class="tooltip">
+                        <strong>D. Todd Christofferson</strong>
+                        Ordained: April 5, 2008<br>
+                        Attorney; Duke University School of Law
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/anderson.webp" alt="Neil L. Andersen">
+                    </div>
+                    <span class="apostle-name">Neil L. Andersen</span>
+                    <div class="tooltip">
+                        <strong>Neil L. Andersen</strong>
+                        Ordained: April 4, 2009<br>
+                        Known for faith-centered testimony and teaching on the Atonement
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/rasband.webp" alt="Ronald A. Rasband">
+                    </div>
+                    <span class="apostle-name">Ronald A. Rasband</span>
+                    <div class="tooltip">
+                        <strong>Ronald A. Rasband</strong>
+                        Ordained: Oct 3, 2015<br>
+                        Teaches about divine direction in everyday life
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/stevenson.webp" alt="Gary E. Stevenson">
+                    </div>
+                    <span class="apostle-name">Gary E. Stevenson</span>
+                    <div class="tooltip">
+                        <strong>Gary E. Stevenson</strong>
+                        Ordained: Oct 3, 2015<br>
+                        Former CEO of Icon Health &amp; Fitness
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/renlund.webp" alt="Dale G. Renlund">
+                    </div>
+                    <span class="apostle-name">Dale G. Renlund</span>
+                    <div class="tooltip">
+                        <strong>Dale G. Renlund</strong>
+                        Ordained: Oct 3, 2015<br>
+                        Former cardiologist; Johns Hopkins trained
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/gong.webp" alt="Gerrit W. Gong">
+                    </div>
+                    <span class="apostle-name">Gerrit W. Gong</span>
+                    <div class="tooltip">
+                        <strong>Gerrit W. Gong</strong>
+                        Ordained: March 31, 2018<br>
+                        Rhodes Scholar; former U.S. Ambassador-at-Large
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/soares.webp" alt="Ulisses Soares">
+                    </div>
+                    <span class="apostle-name">Ulisses Soares</span>
+                    <div class="tooltip">
+                        <strong>Ulisses Soares</strong>
+                        Ordained: March 31, 2018<br>
+                        First Latino member of the Quorum of the Twelve
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/kearon.webp" alt="Patrick Kearon">
+                    </div>
+                    <span class="apostle-name">Patrick Kearon</span>
+                    <div class="tooltip">
+                        <strong>Patrick Kearon</strong>
+                        Ordained: 2024<br>
+                        From England; known for ministry to refugees worldwide
+                    </div>
+                </div>
+
+                <div class="apostle">
+                    <div class="portrait-wrap">
+                        <img src="images/causse.webp" alt="Thierry K. Causse">
+                    </div>
+                    <span class="apostle-name">Thierry K. Causse</span>
+                    <div class="tooltip">
+                        <strong>Thierry K. Causse</strong>
+                        Ordained: 2024<br>
+                        First French member of the Quorum of the Twelve
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
