@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Feed Sign Up</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+
+        :root {
+            --brown-dark: #4a2e12;
+            --brown-mid: #78604080;
+            --brown-light: #c9a87c;
+            --cream: #f5edd8;
+            --cream-dark: #e8d9b8;
+            --gold: #c8972a;
+            --gold-light: #e8b94a;
+            --white: #fffef8;
+            --shadow: rgba(30, 15, 0, 0.45);
+        }
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: rgb(120, 96, 64);
+            background-image:
+                radial-gradient(ellipse at top left, rgba(200, 151, 42, 0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at bottom right, rgba(74, 46, 18, 0.5) 0%, transparent 60%);
+            min-height: 100vh;
+            font-family: 'Lato', sans-serif;
+            color: var(--brown-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 16px;
+            gap: 32px;
+        }
+
+        /* ── Hero image ── */
+        #hero {
+            width: 100%;
+            max-width: 860px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px var(--shadow);
+            border: 3px solid var(--gold);
+        }
+
+        #hero img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            object-position: center 30%;
+            display: block;
+        }
+
+        /* ── Scripture book thumbnails ── */
+        #books {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            width: 100%;
+            max-width: 860px;
+        }
+
+        .book-card {
+            background: var(--cream);
+            border: 2px solid var(--brown-light);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .book-card img {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .book-card p {
+            font-family: 'Cinzel', serif;
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 5px 4px;
+            color: var(--brown-dark);
+            line-height: 1.3;
+            letter-spacing: 0.03em;
+        }
+
+        /* ── Form container ── */
+        #formContainer {
+            background: var(--cream);
+            border: 3px solid var(--gold);
+            border-radius: 6px;
+            box-shadow: 0 12px 48px var(--shadow);
+            width: 100%;
+            max-width: 480px;
+            padding: 36px 40px 32px;
+            position: relative;
+        }
+
+        #formContainer h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--brown-dark);
+            text-align: center;
+            letter-spacing: 0.05em;
+            margin-bottom: 28px;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 14px;
+        }
+
+        #closeBtn {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--brown-light);
+            cursor: pointer;
+            line-height: 1;
+            padding: 2px 6px;
+            transition: color 0.2s;
+        }
+
+        #closeBtn:hover {
+            color: var(--brown-dark);
+        }
+
+        /* ── Form grid layout ── */
+        #myForm {
+            display: grid;
+            grid-template-columns: 130px 1fr;
+            gap: 14px 12px;
+            align-items: center;
+        }
+
+        #myForm label {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--brown-dark);
+            letter-spacing: 0.03em;
+            text-align: right;
+        }
+
+        #myForm input[type="text"],
+        #myForm input[type="password"],
+        #myForm input[type="email"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1.5px solid var(--brown-light);
+            border-radius: 3px;
+            background: var(--white);
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            color: var(--brown-dark);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        #myForm input[type="text"]:focus,
+        #myForm input[type="password"]:focus,
+        #myForm input[type="email"]:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(200, 151, 42, 0.18);
+        }
+
+        /* Gender row label */
+        .gender-label {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--brown-dark);
+            letter-spacing: 0.03em;
+            text-align: right;
+        }
+
+        /* Gender radio group */
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .radio-group label {
+            font-weight: 400;
+            text-align: left;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .radio-group input[type="radio"] {
+            accent-color: var(--gold);
+            width: 15px;
+            height: 15px;
+        }
+
+        /* Checkbox sections — span both columns */
+        #myForm section {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #myForm section label {
+            font-weight: 400;
+            text-align: left;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        #myForm section input[type="checkbox"] {
+            accent-color: var(--gold);
+            width: 15px;
+            height: 15px;
+            flex-shrink: 0;
+        }
+
+        /* Submit button section */
+        .submit-section {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            margin-top: 6px;
+        }
+
+        button[type="submit"] {
+            background: var(--brown-dark);
+            color: var(--cream);
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            border: 2px solid var(--gold);
+            border-radius: 3px;
+            padding: 10px 36px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+        }
+
+        button[type="submit"]:hover {
+            background: var(--gold);
+            color: var(--brown-dark);
+            transform: translateY(-1px);
+        }
+
+        /* ── Output area ── */
+        #output {
+            width: 100%;
+            max-width: 480px;
+            color: var(--cream);
+            font-size: 0.9rem;
+        }
+
+        #output h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--gold-light);
+        }
+
+        #output ul {
+            background: rgba(74, 46, 18, 0.5);
+            border: 1px solid var(--brown-light);
+            border-radius: 4px;
+            padding: 14px 14px 14px 30px;
+            line-height: 1.8;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            #books {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            #formContainer {
+                padding: 28px 20px 24px;
+            }
+
+            #myForm {
+                grid-template-columns: 1fr;
+            }
+
+            #myForm label {
+                text-align: left;
+                margin-bottom: -6px;
+            }
+
+            .gender-label {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero image -->
+    <div id="hero">
+        <img src="images/jesus_feeds_5000.jpeg" alt="Jesus feeds the five thousand">
+    </div>
+
+    <!-- Scripture book thumbnails -->
+    <div id="books">
+        <div class="book-card">
+            <img src="images/old_testament.webp" alt="Old Testament">
+            <p>Old Testament</p>
+        </div>
+        <div class="book-card">
+            <img src="images/new_testament.webp" alt="New Testament">
+            <p>New Testament</p>
+        </div>
+        <div class="book-card">
+            <img src="images/book_of_mormon.webp" alt="Book of Mormon">
+            <p>Book of Mormon</p>
+        </div>
+        <div class="book-card">
+            <img src="images/doctrine_and_covenants.webp" alt="Doctrine and Covenants">
+            <p>Doctrine &amp; Covenants</p>
+        </div>
+        <div class="book-card">
+            <img src="images/pearl_of_great_price.webp" alt="Pearl of Great Price">
+            <p>Pearl of Great Price</p>
+        </div>
+    </div>
+
+    <!-- Sign-up form -->
+    <div id="formContainer">
+        <h3>Sign Up for Daily Scripture Feed</h3>
+        <form id="myForm">
+            <button type="button" id="closeBtn">✕</button>
+
+            <label for="username">User Name:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <span class="gender-label">Gender:</span>
+            <div class="radio-group">
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female" required>
+                <label for="female">Female</label>
+            </div>
+
+            <section>
+                <input type="checkbox" id="newsletter" name="newsletter">
+                <label for="newsletter">Subscribe to newsletter</label>
+            </section>
+
+            <section>
+                <input type="checkbox" id="conditions" name="conditions" required>
+                <label for="conditions">I acknowledge the terms and conditions</label>
+            </section>
+
+            <section class="submit-section">
+                <button type="submit">Submit</button>
+            </section>
+        </form>
+    </div>
+
+    <div id="output"></div>
+
+    <script>
+        // Here is some Javascript to start looking forward to wdd131
+        document.getElementById("closeBtn").addEventListener("click", function () {
+            document.getElementById("formContainer").style.display = "none";
+        });
+
+        const form = document.getElementById('myForm');
+        const output = document.getElementById('output');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Stop form from actually submitting
+
+            const formData = new FormData(form);
+            const entries = [];
+
+            for (const [key, value] of formData.entries()) {
+                if (key == "password") {
+                    entries.push(`<strong>${key}</strong>: ${value} (you should probably encrypt the password)`);
+                } else {
+                    entries.push(`<strong>${key}</strong>: ${value}`);
+                }
+            }
+
+            output.innerHTML = `
+            <br>  
+            <h3>Here is the data that would be sent to the server:</h3>
+            <ul>
+                ${entries.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+            `;
+        });
+    </script>
+
+</body>
+
+</html>
